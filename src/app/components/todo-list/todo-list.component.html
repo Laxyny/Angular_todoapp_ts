@@ -1,0 +1,40 @@
+<h2>Bienvenue, {{ displayName }} !</h2>
+
+<!-- Formulaire d'ajout -->
+<form (submit)="addTodo()">
+    <h3>Ajouter un Todo</h3>
+    <input [(ngModel)]="newTodo.title" type="text" placeholder="Titre" name="titre" required>
+    <input [(ngModel)]="newTodo.description" type="text" placeholder="Description" name="description" required>
+    <button type="submit">Ajouter</button>
+</form>
+
+<!-- Formulaire de modification -->
+<div *ngIf="isEditing">
+    <h3>Modifier un Todo</h3>
+    <input [(ngModel)]="editTodoData.title" type="text" placeholder="Titre" name="titre" required>
+    <input [(ngModel)]="editTodoData.description" type="text" placeholder="Description" name="description" required>
+    <button (click)="editTodo()">Modifier</button>
+    <button (click)="isEditing = false">Annuler</button>
+</div>
+
+<!-- Liste des todos -->
+<h3>Vos Todos</h3>
+<ul>
+    <li *ngFor="let todo of todos">
+        <span [style.textDecoration]="todo.completed ? 'line-through' : 'none'">
+            {{ todo.title }} - {{ todo.description }}
+        </span>
+        <button (click)="showEditForm(todo)">Modifier</button>
+        <button (click)="toggleTodoStatus(todo)">
+            {{ todo.completed ? 'Reprendre' : 'Terminer' }}
+        </button>
+        <button (click)="deleteTodo(todo.id)">Supprimer</button>
+    </li>
+</ul>
+
+<!-- Boutons de filtre -->
+<button (click)="filterCompleted()">Voir les tâches complétées</button>
+<button (click)="filterNotCompleted()">Voir les tâches non complétées</button>
+
+<!-- Déconnexion -->
+<button (click)="logout()">Se déconnecter</button>

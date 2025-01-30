@@ -1,0 +1,20 @@
+<h2>Connexion / Inscription</h2>
+
+<!-- Formulaire d'inscription -->
+<form (submit)="register()">
+    <h3>Créer un compte</h3>
+    <input [(ngModel)]="registerData.email" type="email" placeholder="Email" name="registerEmail" required>
+    <input [(ngModel)]="registerData.password" type="password" placeholder="Mot de passe" name="registerPassword"
+        required>
+    <input [(ngModel)]="registerData.displayName" type="text" placeholder="Nom d'utilisateur" name="registerDisplayName"
+        required>
+    <button type="submit">S'inscrire</button>
+</form>
+
+<!-- Formulaire de connexion -->
+<form (submit)="login()">
+    <h3>Se connecter</h3>
+    <input [(ngModel)]="loginData.email" type="email" placeholder="Email" name="loginEmail" required>
+    <input [(ngModel)]="loginData.password" type="password" placeholder="Mot de passe" name="loginPassword" required>
+    <button type="submit">Connexion</button>
+</form>
