@@ -3,7 +3,9 @@
 <!-- Formulaire d'ajout -->
 <form (submit)="addTodo()">
     <h3>Ajouter un Todo</h3>
+    <!-- champ pour le titre du todo lié a newTODO -->
     <input [(ngModel)]="newTodo.title" type="text" placeholder="Titre" name="titre" required>
+    <!-- champ pour la description du todo  -->
     <input [(ngModel)]="newTodo.description" type="text" placeholder="Description" name="description" required>
     <button type="submit">Ajouter</button>
 </form>
@@ -11,6 +13,7 @@
 <!-- Formulaire de modification -->
 <div *ngIf="isEditing">
     <h3>Modifier un Todo</h3>
+    <!-- champ pour modifier le titre et la description -->
     <input [(ngModel)]="editTodoData.title" type="text" placeholder="Titre" name="titre" required>
     <input [(ngModel)]="editTodoData.description" type="text" placeholder="Description" name="description" required>
     <button (click)="editTodo()">Modifier</button>
@@ -20,10 +23,13 @@
 <!-- Liste des todos -->
 <h3>Vos Todos</h3>
 <ul>
+    <!-- boucle pour chaque todo dans la liste -->
     <li *ngFor="let todo of todos">
+        <!-- affichage du titre et de la desciption --> 
         <span [style.textDecoration]="todo.completed ? 'line-through' : 'none'">
             {{ todo.title }} - {{ todo.description }}
         </span>
+        <!-- bouton pour modifier  , changer le statut et supprimer le todo -->
         <button (click)="showEditForm(todo)">Modifier</button>
         <button (click)="toggleTodoStatus(todo)">
             {{ todo.completed ? 'Reprendre' : 'Terminer' }}

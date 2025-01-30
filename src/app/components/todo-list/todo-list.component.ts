@@ -17,19 +17,19 @@ import { CommonModule, NgFor, NgIf } from '@angular/common';
 })
 
 export class TodoListComponent implements OnInit {
-  todos: any[] = [];
-  newTodo = { title: '', description: '', completed: false };
-  editTodoData = { id: '', title: '', description: '' };
-  isEditing = false;
-  userId: string = '';
-  displayName: string = '';
+  todos: any[] = []; // Liste des todos 
+  newTodo = { title: '', description: '', completed: false }; // nouveau todo a ajouter
+  editTodoData = { id: '', title: '', description: '' }; // données du todo en cours 
+  isEditing = false; // indique  si on est en mode edition
+  userId: string = ''; // ID de l'utilisateur connecté
+  displayName: string = ''; // nom d'affichage de l'utilisateur 
 
   constructor(private todoService: TodoService, private authService: AuthService) {}
 
   ngOnInit() {
     this.userId = localStorage.getItem('userId') ?? '';
     this.displayName = localStorage.getItem('displayName') ?? 'Utilisateur';
-
+   // verification de l'authentification 
     if (!this.userId) {
       this.authService.logout();
     } else {
@@ -37,6 +37,7 @@ export class TodoListComponent implements OnInit {
     }
   }
 
+  // recuperer des todos depuis le service 
   fetchTodos() {
     this.todoService.getTodos(this.userId).subscribe((response: any) => {
       this.todos = Array.isArray(response) ? response : response.todos ?? [];
